@@ -1,14 +1,31 @@
 name: dart_tree_sitter
-description: A starting point for Dart libraries or applications.
-version: 1.0.0
-# repository: https://github.com/my_org/my_repo
+description: Dart bindings for tree-sitter.
+version: 0.1.0
+repository: https://github.com/NTBBloodbath/dart-tree-sitter
 
 environment:
   sdk: '>=2.19.5 <3.0.0'
 
-# dependencies:
-#   path: ^1.8.0
+ffigen:
+  name: TreeSitter
+  description: TreeSitter API.
+  output: "lib/src/api/tree_sitter.dart"
+  headers:
+    entry-points:
+      - "third-party/tree-sitter/lib/include/tree_sitter/api.h"
+    include-directives:
+      - "third-party/tree-sitter/lib/src/**"
+      - "third-party/tree-sitter/lib/include/**"
+  compiler-opts:
+    - "-I/usr/lib64/llvm14/lib/clang/14.0.5/include"
+  comments:
+    style: any
+    length: full
+
+dependencies:
+  ffi: ^2.0.1
 
 dev_dependencies:
+  ffigen: ^7.2.9
   lints: ^2.0.0
   test: ^1.21.0
